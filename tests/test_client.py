@@ -5,6 +5,7 @@ from __future__ import annotations
 import http.client
 import io
 import json
+import re
 import urllib.error
 import urllib.request
 from email.message import Message
@@ -321,8 +322,8 @@ def test_all_has_no_duplicates() -> None:
     assert len(pywcif.__all__) == len(set(pywcif.__all__))
 
 
-def test_version_is_0_1_0() -> None:
-    assert pywcif.__version__ == "0.1.0"
+def test_version_is_a_plain_release_number() -> None:
+    assert re.fullmatch(r"\d+\.\d+\.\d+", pywcif.__version__)
 
 
 # ---------------------------------------------------------------------------

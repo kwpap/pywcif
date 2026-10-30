@@ -7,6 +7,13 @@ include breaking changes.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-30
+
+### Changed
+
+- Rewrote the README around short usage examples, so the PyPI page starts with how to use the
+  library. Development and release notes moved to `CONTRIBUTING.md`.
+
 ## [0.1.0] - 2026-10-30
 
 First release.
@@ -36,5 +43,6 @@ First release.
 - OAuth tokens are never forwarded on HTTP redirects and are never sent over plain http,
   except to loopback hosts.
 
-[Unreleased]: https://github.com/kwpap/pywcif/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/kwpap/pywcif/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/kwpap/pywcif/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kwpap/pywcif/releases/tag/v0.1.0
