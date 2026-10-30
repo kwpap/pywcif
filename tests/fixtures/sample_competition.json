@@ -1,0 +1,946 @@
+{
+  "formatVersion": "1.0",
+  "id": "AthensOpen2026",
+  "name": "Athens Open 2026",
+  "shortName": "Athens Open 2026",
+  "persons": [
+    {
+      "registrantId": 1001,
+      "name": "Nikolaos Papadakis",
+      "wcaUserId": 4101,
+      "wcaId": "2019PAPA01",
+      "countryIso2": "GR",
+      "gender": "m",
+      "avatar": {
+        "url": "https://example.com/avatars/1001.jpg",
+        "thumbUrl": "https://example.com/avatars/1001-thumb.jpg"
+      },
+      "roles": [],
+      "registration": {
+        "wcaRegistrationId": 9001,
+        "eventIds": [
+          "333",
+          "333fm",
+          "333mbf"
+        ],
+        "status": "accepted",
+        "isCompeting": true
+      },
+      "assignments": [
+        {
+          "activityId": 3,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 7,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 9,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 11,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        }
+      ],
+      "personalBests": [
+        {
+          "eventId": "333",
+          "best": 650,
+          "worldRanking": 8431,
+          "continentalRanking": 612,
+          "nationalRanking": 23,
+          "type": "single"
+        },
+        {
+          "eventId": "333",
+          "best": 694,
+          "worldRanking": 9120,
+          "continentalRanking": 701,
+          "nationalRanking": 31,
+          "type": "average"
+        },
+        {
+          "eventId": "333fm",
+          "best": 22,
+          "worldRanking": 1201,
+          "continentalRanking": 140,
+          "nationalRanking": 4,
+          "type": "single"
+        },
+        {
+          "eventId": "333fm",
+          "best": 2433,
+          "worldRanking": 1450,
+          "continentalRanking": 160,
+          "nationalRanking": 6,
+          "type": "average"
+        },
+        {
+          "eventId": "333mbf",
+          "best": 880325201,
+          "worldRanking": 15,
+          "continentalRanking": 3,
+          "nationalRanking": 1,
+          "type": "single"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "registrantId": 1002,
+      "name": "Eleni Konstantinou",
+      "wcaUserId": 4102,
+      "wcaId": "2015KONS02",
+      "countryIso2": "GR",
+      "gender": "f",
+      "avatar": {
+        "url": "https://example.com/avatars/1002.jpg",
+        "thumbUrl": "https://example.com/avatars/1002-thumb.jpg"
+      },
+      "roles": [
+        "organizer"
+      ],
+      "registration": {
+        "wcaRegistrationId": 9002,
+        "eventIds": [
+          "333",
+          "333fm"
+        ],
+        "status": "accepted",
+        "isCompeting": true
+      },
+      "assignments": [
+        {
+          "activityId": 3,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 7,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 11,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        }
+      ],
+      "personalBests": [
+        {
+          "eventId": "333",
+          "best": 975,
+          "worldRanking": 12031,
+          "continentalRanking": 1500,
+          "nationalRanking": 51,
+          "type": "single"
+        },
+        {
+          "eventId": "333",
+          "best": 1002,
+          "worldRanking": 15120,
+          "continentalRanking": 1820,
+          "nationalRanking": 63,
+          "type": "average"
+        },
+        {
+          "eventId": "333fm",
+          "best": 28,
+          "worldRanking": 2870,
+          "continentalRanking": 380,
+          "nationalRanking": 14,
+          "type": "single"
+        }
+      ],
+      "extensions": [],
+      "birthdate": "1994-03-12",
+      "email": "eleni.konstantinou@example.com"
+    },
+    {
+      "registrantId": 1003,
+      "name": "Lukas Brandt",
+      "wcaUserId": 4103,
+      "wcaId": "2018BRAN03",
+      "countryIso2": "DE",
+      "gender": "m",
+      "avatar": {
+        "url": "https://example.com/avatars/1003.jpg",
+        "thumbUrl": "https://example.com/avatars/1003-thumb.jpg"
+      },
+      "roles": [],
+      "registration": {
+        "wcaRegistrationId": 9003,
+        "eventIds": [
+          "333",
+          "333mbf"
+        ],
+        "status": "accepted",
+        "isCompeting": true,
+        "guests": 1,
+        "comments": "Would prefer a seat away from the entrance."
+      },
+      "assignments": [
+        {
+          "activityId": 3,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 9,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 11,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        }
+      ],
+      "personalBests": [
+        {
+          "eventId": "333",
+          "best": 1119,
+          "worldRanking": 22110,
+          "continentalRanking": 2456,
+          "nationalRanking": 111,
+          "type": "single"
+        },
+        {
+          "eventId": "333",
+          "best": 1164,
+          "worldRanking": 24400,
+          "continentalRanking": 2701,
+          "nationalRanking": 130,
+          "type": "average"
+        },
+        {
+          "eventId": "333mbf",
+          "best": 930272001,
+          "worldRanking": 310,
+          "continentalRanking": 40,
+          "nationalRanking": 9,
+          "type": "single"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "registrantId": 1004,
+      "name": "Ayaka Tanaka",
+      "wcaUserId": 4104,
+      "wcaId": "2017TANA11",
+      "countryIso2": "JP",
+      "gender": "f",
+      "avatar": {
+        "url": "https://example.com/avatars/1004.jpg",
+        "thumbUrl": "https://example.com/avatars/1004-thumb.jpg"
+      },
+      "roles": [],
+      "registration": {
+        "wcaRegistrationId": 9004,
+        "eventIds": [
+          "333",
+          "333fm"
+        ],
+        "status": "accepted",
+        "isCompeting": true
+      },
+      "assignments": [
+        {
+          "activityId": 4,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        },
+        {
+          "activityId": 7,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        }
+      ],
+      "personalBests": [
+        {
+          "eventId": "333",
+          "best": 1274,
+          "worldRanking": 30120,
+          "continentalRanking": 3450,
+          "nationalRanking": 70,
+          "type": "single"
+        },
+        {
+          "eventId": "333",
+          "best": 1298,
+          "worldRanking": 35100,
+          "continentalRanking": 4010,
+          "nationalRanking": 84,
+          "type": "average"
+        },
+        {
+          "eventId": "333fm",
+          "best": 26,
+          "worldRanking": 1920,
+          "continentalRanking": 210,
+          "nationalRanking": 9,
+          "type": "single"
+        },
+        {
+          "eventId": "333fm",
+          "best": 2833,
+          "worldRanking": 2100,
+          "continentalRanking": 240,
+          "nationalRanking": 11,
+          "type": "average"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "registrantId": 1005,
+      "name": "Dimitris Vlachos",
+      "wcaUserId": 4105,
+      "wcaId": null,
+      "countryIso2": "GR",
+      "gender": "m",
+      "avatar": null,
+      "roles": [],
+      "registration": {
+        "wcaRegistrationId": 9005,
+        "eventIds": [
+          "333"
+        ],
+        "status": "accepted",
+        "isCompeting": true
+      },
+      "assignments": [
+        {
+          "activityId": 4,
+          "assignmentCode": "competitor",
+          "stationNumber": null
+        }
+      ],
+      "personalBests": [],
+      "extensions": []
+    },
+    {
+      "registrantId": 1006,
+      "name": "Chloe Martin",
+      "wcaUserId": 4106,
+      "wcaId": "2021MART07",
+      "countryIso2": "FR",
+      "gender": "f",
+      "avatar": {
+        "url": "https://example.com/avatars/1006.jpg",
+        "thumbUrl": "https://example.com/avatars/1006-thumb.jpg"
+      },
+      "roles": [],
+      "registration": {
+        "wcaRegistrationId": 9006,
+        "eventIds": [
+          "333"
+        ],
+        "status": "pending",
+        "isCompeting": true
+      },
+      "assignments": [],
+      "personalBests": [
+        {
+          "eventId": "333",
+          "best": 1342,
+          "worldRanking": 41020,
+          "continentalRanking": 5120,
+          "nationalRanking": 210,
+          "type": "single"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "registrantId": null,
+      "name": "Georgios Makris",
+      "wcaUserId": 4107,
+      "wcaId": "2009MAKR01",
+      "countryIso2": "GR",
+      "gender": "m",
+      "avatar": {
+        "url": "https://example.com/avatars/4107.jpg",
+        "thumbUrl": "https://example.com/avatars/4107-thumb.jpg"
+      },
+      "roles": [
+        "delegate"
+      ],
+      "registration": null,
+      "assignments": [
+        {
+          "activityId": 3,
+          "assignmentCode": "staff-judge",
+          "stationNumber": 1
+        },
+        {
+          "activityId": 4,
+          "assignmentCode": "staff-judge",
+          "stationNumber": 1
+        },
+        {
+          "activityId": 7,
+          "assignmentCode": "staff-scrambler",
+          "stationNumber": null
+        },
+        {
+          "activityId": 9,
+          "assignmentCode": "staff-scrambler",
+          "stationNumber": null
+        },
+        {
+          "activityId": 11,
+          "assignmentCode": "staff-judge",
+          "stationNumber": 2
+        }
+      ],
+      "personalBests": [],
+      "extensions": []
+    }
+  ],
+  "events": [
+    {
+      "id": "333",
+      "rounds": [
+        {
+          "id": "333-r1",
+          "format": "a",
+          "timeLimit": {
+            "centiseconds": 60000,
+            "cumulativeRoundIds": []
+          },
+          "cutoff": {
+            "numberOfAttempts": 2,
+            "attemptResult": 3000
+          },
+          "advancementCondition": {
+            "type": "ranking",
+            "level": 3
+          },
+          "results": [
+            {
+              "personId": 1001,
+              "ranking": 1,
+              "attempts": [
+                {
+                  "result": 741
+                },
+                {
+                  "result": 812
+                },
+                {
+                  "result": 698
+                },
+                {
+                  "result": 903
+                },
+                {
+                  "result": 765
+                }
+              ],
+              "best": 698,
+              "average": 772
+            },
+            {
+              "personId": 1002,
+              "ranking": 2,
+              "attempts": [
+                {
+                  "result": 1058
+                },
+                {
+                  "result": 1120
+                },
+                {
+                  "result": 995
+                },
+                {
+                  "result": 1102
+                },
+                {
+                  "result": 1087
+                }
+              ],
+              "best": 995,
+              "average": 1082
+            },
+            {
+              "personId": 1003,
+              "ranking": 3,
+              "attempts": [
+                {
+                  "result": 1203
+                },
+                {
+                  "result": 1156
+                },
+                {
+                  "result": 1290,
+                  "reconstruction": "R U2 R' F2 D' L2 B U' R2 F' U2 L D2 R' U2 F2 R2 D' B2 U2 L2"
+                },
+                {
+                  "result": 1177
+                },
+                {
+                  "result": 1244
+                }
+              ],
+              "best": 1156,
+              "average": 1208
+            },
+            {
+              "personId": 1004,
+              "ranking": 4,
+              "attempts": [
+                {
+                  "result": 1310
+                },
+                {
+                  "result": 1274
+                },
+                {
+                  "result": 1342
+                },
+                {
+                  "result": 1296
+                },
+                {
+                  "result": 1288
+                }
+              ],
+              "best": 1274,
+              "average": 1298
+            },
+            {
+              "personId": 1005,
+              "ranking": 5,
+              "attempts": [
+                {
+                  "result": 1890
+                },
+                {
+                  "result": -1
+                },
+                {
+                  "result": 1725
+                },
+                {
+                  "result": 2010
+                },
+                {
+                  "result": 1966
+                }
+              ],
+              "best": 1725,
+              "average": 1955
+            }
+          ],
+          "scrambleSetCount": 2,
+          "extensions": []
+        },
+        {
+          "id": "333-r2",
+          "format": "a",
+          "timeLimit": {
+            "centiseconds": 60000,
+            "cumulativeRoundIds": []
+          },
+          "cutoff": null,
+          "advancementCondition": null,
+          "results": [
+            {
+              "personId": 1001,
+              "ranking": 1,
+              "attempts": [
+                {
+                  "result": 705
+                },
+                {
+                  "result": 688
+                },
+                {
+                  "result": 721
+                },
+                {
+                  "result": 650
+                },
+                {
+                  "result": 690
+                }
+              ],
+              "best": 650,
+              "average": 694
+            },
+            {
+              "personId": 1002,
+              "ranking": 2,
+              "attempts": [
+                {
+                  "result": 1015
+                },
+                {
+                  "result": 990
+                },
+                {
+                  "result": 1040
+                },
+                {
+                  "result": 975
+                },
+                {
+                  "result": 1002
+                }
+              ],
+              "best": 975,
+              "average": 1002
+            },
+            {
+              "personId": 1003,
+              "ranking": 3,
+              "attempts": [
+                {
+                  "result": 1180
+                },
+                {
+                  "result": 1165
+                },
+                {
+                  "result": 1119
+                },
+                {
+                  "result": 1203
+                },
+                {
+                  "result": 1148
+                }
+              ],
+              "best": 1119,
+              "average": 1164
+            }
+          ],
+          "scrambleSetCount": 1,
+          "extensions": []
+        }
+      ],
+      "competitorLimit": 80,
+      "extensions": []
+    },
+    {
+      "id": "333fm",
+      "rounds": [
+        {
+          "id": "333fm-r1",
+          "format": "m",
+          "timeLimit": {
+            "centiseconds": 360000,
+            "cumulativeRoundIds": []
+          },
+          "cutoff": null,
+          "advancementCondition": null,
+          "results": [
+            {
+              "personId": 1001,
+              "ranking": 1,
+              "attempts": [
+                {
+                  "result": 24
+                },
+                {
+                  "result": 27
+                },
+                {
+                  "result": 22
+                }
+              ],
+              "best": 22,
+              "average": 2433
+            },
+            {
+              "personId": 1004,
+              "ranking": 2,
+              "attempts": [
+                {
+                  "result": 28
+                },
+                {
+                  "result": 31
+                },
+                {
+                  "result": 26
+                }
+              ],
+              "best": 26,
+              "average": 2833
+            },
+            {
+              "personId": 1002,
+              "ranking": 3,
+              "attempts": [
+                {
+                  "result": 30
+                },
+                {
+                  "result": -1
+                },
+                {
+                  "result": 33
+                }
+              ],
+              "best": 30,
+              "average": -1
+            }
+          ],
+          "scrambleSetCount": 1,
+          "extensions": []
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "333mbf",
+      "rounds": [
+        {
+          "id": "333mbf-r1",
+          "format": "1",
+          "timeLimit": {
+            "centiseconds": 360000,
+            "cumulativeRoundIds": [
+              "333mbf-r1"
+            ]
+          },
+          "cutoff": null,
+          "advancementCondition": null,
+          "results": [
+            {
+              "personId": 1001,
+              "ranking": 1,
+              "attempts": [
+                {
+                  "result": 880325201
+                }
+              ],
+              "best": 880325201,
+              "average": 0
+            },
+            {
+              "personId": 1003,
+              "ranking": 2,
+              "attempts": [
+                {
+                  "result": 930272001
+                }
+              ],
+              "best": 930272001,
+              "average": 0
+            }
+          ],
+          "scrambleSetCount": 1,
+          "extensions": []
+        }
+      ],
+      "qualification": {
+        "whenDate": "2026-03-01",
+        "type": "anyResult",
+        "resultType": "single"
+      },
+      "extensions": []
+    }
+  ],
+  "schedule": {
+    "startDate": "2026-05-16",
+    "numberOfDays": 1,
+    "venues": [
+      {
+        "id": 1,
+        "name": "Athens Open Venue",
+        "latitudeMicrodegrees": 37983800,
+        "longitudeMicrodegrees": 23727500,
+        "countryIso2": "GR",
+        "timezone": "Europe/Athens",
+        "rooms": [
+          {
+            "id": 1,
+            "name": "Main Hall",
+            "color": "#1f77b4",
+            "activities": [
+              {
+                "id": 1,
+                "name": "Registration",
+                "activityCode": "other-registration",
+                "startTime": "2026-05-16T05:30:00Z",
+                "endTime": "2026-05-16T06:30:00Z",
+                "childActivities": [],
+                "scrambleSetId": null,
+                "extensions": []
+              },
+              {
+                "id": 2,
+                "name": "3x3x3 Cube Round 1",
+                "activityCode": "333-r1",
+                "startTime": "2026-05-16T06:30:00Z",
+                "endTime": "2026-05-16T08:30:00Z",
+                "childActivities": [
+                  {
+                    "id": 3,
+                    "name": "3x3x3 Cube Round 1 Group 1",
+                    "activityCode": "333-r1-g1",
+                    "startTime": "2026-05-16T06:30:00Z",
+                    "endTime": "2026-05-16T07:30:00Z",
+                    "childActivities": [],
+                    "scrambleSetId": 1,
+                    "extensions": []
+                  },
+                  {
+                    "id": 4,
+                    "name": "3x3x3 Cube Round 1 Group 2",
+                    "activityCode": "333-r1-g2",
+                    "startTime": "2026-05-16T07:30:00Z",
+                    "endTime": "2026-05-16T08:30:00Z",
+                    "childActivities": [],
+                    "scrambleSetId": 2,
+                    "extensions": []
+                  }
+                ],
+                "scrambleSetId": null,
+                "extensions": [
+                  {
+                    "id": "groupifier.ActivityConfig",
+                    "specUrl": "https://groupifier.jonatanklosko.com/wcif-extensions/ActivityConfig.json",
+                    "data": {
+                      "capacity": 6,
+                      "groups": 2,
+                      "scramblers": 1,
+                      "runners": 0,
+                      "assignJudges": true
+                    }
+                  }
+                ]
+              },
+              {
+                "id": 5,
+                "name": "Lunch",
+                "activityCode": "other-lunch",
+                "startTime": "2026-05-16T09:30:00Z",
+                "endTime": "2026-05-16T10:30:00Z",
+                "childActivities": [],
+                "scrambleSetId": null,
+                "extensions": []
+              },
+              {
+                "id": 10,
+                "name": "3x3x3 Cube Round 2 (Final)",
+                "activityCode": "333-r2",
+                "startTime": "2026-05-16T12:30:00Z",
+                "endTime": "2026-05-16T13:15:00Z",
+                "childActivities": [
+                  {
+                    "id": 11,
+                    "name": "3x3x3 Cube Round 2 Group 1",
+                    "activityCode": "333-r2-g1",
+                    "startTime": "2026-05-16T12:30:00Z",
+                    "endTime": "2026-05-16T13:15:00Z",
+                    "childActivities": [],
+                    "scrambleSetId": 5,
+                    "extensions": []
+                  }
+                ],
+                "scrambleSetId": null,
+                "extensions": []
+              }
+            ],
+            "extensions": [
+              {
+                "id": "groupifier.RoomConfig",
+                "specUrl": "https://groupifier.jonatanklosko.com/wcif-extensions/RoomConfig.json",
+                "data": {
+                  "capacity": 40
+                }
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Side Room",
+            "color": "#ff7f0e",
+            "activities": [
+              {
+                "id": 6,
+                "name": "3x3x3 Fewest Moves Round 1",
+                "activityCode": "333fm-r1",
+                "startTime": "2026-05-16T08:30:00Z",
+                "endTime": "2026-05-16T09:30:00Z",
+                "childActivities": [
+                  {
+                    "id": 7,
+                    "name": "3x3x3 Fewest Moves Round 1 Group 1",
+                    "activityCode": "333fm-r1-g1",
+                    "startTime": "2026-05-16T08:30:00Z",
+                    "endTime": "2026-05-16T09:30:00Z",
+                    "childActivities": [],
+                    "scrambleSetId": 3,
+                    "extensions": []
+                  }
+                ],
+                "scrambleSetId": null,
+                "extensions": []
+              },
+              {
+                "id": 8,
+                "name": "3x3x3 Multi-Blind (Final)",
+                "activityCode": "333mbf-r1",
+                "startTime": "2026-05-16T11:00:00Z",
+                "endTime": "2026-05-16T12:00:00Z",
+                "childActivities": [
+                  {
+                    "id": 9,
+                    "name": "3x3x3 Multi-Blind Group 1",
+                    "activityCode": "333mbf-r1-g1",
+                    "startTime": "2026-05-16T11:00:00Z",
+                    "endTime": "2026-05-16T12:00:00Z",
+                    "childActivities": [],
+                    "scrambleSetId": 4,
+                    "extensions": []
+                  }
+                ],
+                "scrambleSetId": null,
+                "extensions": []
+              }
+            ],
+            "extensions": []
+          }
+        ],
+        "extensions": []
+      }
+    ]
+  },
+  "competitorLimit": 120,
+  "extensions": [
+    {
+      "id": "groupifier.CompetitionConfig",
+      "specUrl": "https://groupifier.jonatanklosko.com/wcif-extensions/CompetitionConfig.json",
+      "data": {
+        "localNamesFirst": false,
+        "printOneName": true,
+        "scorecardsBackgroundUrl": "",
+        "competitorsSortingRule": "ranks",
+        "noTasksForNewcomers": false,
+        "tasksForOwnEventsOnly": false,
+        "noRunningForForeigners": false,
+        "printStations": true,
+        "scorecardPaperSize": "a4"
+      }
+    }
+  ],
+  "registrationInfo": {
+    "source": "external-registration-form",
+    "syncedAt": "2026-05-01T10:00:00Z",
+    "paymentProvider": "manual"
+  }
+}
