@@ -1,7 +1,12 @@
 # pywcif
 
-Read, query, check and write [WCA](https://www.worldcubeassociation.org) competition data
-(WCIF) in Python, with fully typed models.
+Read, query, check and write [World Cube Association (WCA)](https://www.worldcubeassociation.org)
+speedcubing competition data in Python. pywcif works with WCIF, the format the WCA website,
+Groupifier and WCA Live use for competitions: competitors, events, rounds, results, schedules and
+group assignments, as fully typed models.
+
+Useful for competition organizers, WCA delegates and anyone building cubing tools: scorecards,
+group and schedule printouts, results analysis, or checking a competition before it is announced.
 
 [![PyPI](https://img.shields.io/pypi/v/pywcif)](https://pypi.org/project/pywcif/)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
@@ -137,5 +142,6 @@ This includes emails, birthdates and registration comments. The token is only se
 - [Changelog](https://github.com/kwpap/pywcif/blob/main/CHANGELOG.md)
 - [WCIF specification](https://github.com/thewca/wcif/blob/master/specification.md)
 - [Contributing](https://github.com/kwpap/pywcif/blob/main/CONTRIBUTING.md)
+- [Security policy](https://github.com/kwpap/pywcif/blob/main/SECURITY.md)
 
 MIT licensed.

@@ -13,6 +13,13 @@ include breaking changes.
 
 - Rewrote the README around short usage examples, so the PyPI page starts with how to use the
   library. Development and release notes moved to `CONTRIBUTING.md`.
+- Clearer PyPI summary and more search keywords (speedcubing, Rubik's cube, WCA, Groupifier,
+  WCA Live, ...), so people can find the package.
+
+### Security
+
+- Added `SECURITY.md` with a private reporting channel, Dependabot updates for GitHub Actions
+  and Python dependencies, and `persist-credentials: false` on every workflow checkout.
 
 ## [0.1.0] - 2026-10-30
 
