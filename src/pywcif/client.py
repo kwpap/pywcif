@@ -28,6 +28,8 @@ def fetch_wcif(
 ) -> Competition:
     """Download and validate a competition's WCIF from the WCA website.
 
+    This is :func:`fetch_wcif_dict` followed by ``Competition.model_validate``.
+
     Without a token the public endpoint ``/api/v0/competitions/{id}/wcif/public`` is used.
     With a token the private endpoint ``/api/v0/competitions/{id}/wcif`` is used and the
     token is sent as ``Authorization: Bearer <token>``. An empty token is treated as no token.
@@ -44,6 +46,30 @@ def fetch_wcif(
     Raises:
         ValueError: If ``base_url`` does not use an http or https scheme, or if the response
             body is not a valid WCIF document (including invalid JSON).
+        urllib.error.HTTPError: If the server answers with an error status (for example 404).
+        urllib.error.URLError: If the request fails at the network level, including timeouts.
+    """
+    data = fetch_wcif_dict(
+        competition_id, oauth_token=oauth_token, base_url=base_url, timeout=timeout
+    )
+    return Competition.model_validate(data)
+
+
+def fetch_wcif_dict(
+    competition_id: str,
+    *,
+    oauth_token: str | None = None,
+    base_url: str = _DEFAULT_BASE_URL,
+    timeout: float = 15.0,
+) -> dict[str, Any]:
+    """Download a competition's WCIF as the raw decoded JSON dict, without validation.
+
+    Takes the same arguments as :func:`fetch_wcif`. Useful for snapshotting payloads or
+    comparing them with ``Competition.to_wcif_dict()``.
+
+    Raises:
+        ValueError: If ``base_url`` does not use an http or https scheme, or the body is not a
+            JSON object.
         urllib.error.HTTPError: If the server answers with an error status (for example 404).
         urllib.error.URLError: If the request fails at the network level, including timeouts.
     """
@@ -70,7 +96,9 @@ def fetch_wcif(
     with urllib.request.urlopen(request, timeout=timeout) as response:
         body = response.read()
     data: Any = json.loads(body)
-    return Competition.model_validate(data)
+    if not isinstance(data, dict):
+        raise ValueError(f"expected a JSON object, got {type(data).__name__}")
+    return data
 
 
 def load_wcif(source: str | Path | bytes | bytearray | dict[str, Any]) -> Competition:

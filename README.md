@@ -208,11 +208,12 @@ The sample competition is clean, so the loop prints nothing for it.
   spellings are accepted on input. `to_wcif_dict()` and `to_wcif_json()` write camelCase.
 - **Required nullable fields** are always written, as `null` when empty. Examples: `wcaId`,
   `registrantId`, `avatar`, `registration`, `cutoff`, `timeLimit`, `advancementCondition`,
-  `ranking`, `stationNumber`, `scrambleSetId`, and the competition's `competitorLimit`.
+  `ranking`, `stationNumber`, and the competition's `competitorLimit`.
 - **Optional private fields** are omitted when they are unset. An explicit `null` in the input is
   kept. Examples: `email`, `birthdate`, a registration's `guests`, `comments` and
   `administrativeNotes`, an attempt's `reconstruction`, a round's `scrambleSets`, an event's
-  `competitorLimit` and `qualification`, and a competition's `series`.
+  `competitorLimit` and `qualification`, and a competition's `series`. An activity's
+  `scrambleSetId` is also treated this way, because the live WCA website omits it.
 - **Unknown keys** are kept (`extra="allow"`) and written back. They are available in
   `model_extra`.
 - **Enum fields accept unknown strings.** Fields are typed `EnumType | str`, so a role or
@@ -251,3 +252,13 @@ ruff check .
 mypy src tests
 pytest
 ```
+
+### Tests against real WCIFs
+
+`tests/test_real_wcif.py` checks that real WCA documents survive a lossless round-trip:
+
+- **Recorded snapshots** in `tests/fixtures/real/*.json` run with every `pytest` (and in CI).
+  Add one with `python scripts/snapshot_wcif.py <CompetitionId>`.
+- **Live tests** download fresh WCIFs and are opt-in: `pytest --run-live`. Pick competitions
+  with `PYWCIF_LIVE_COMPETITIONS="WC2025,Euro2024"`. The separate *Live WCIF* GitHub workflow
+  runs them weekly, on pull requests touching `src/`, and on demand.

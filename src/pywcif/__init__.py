@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pywcif.activity_code import ActivityCode
 from pywcif.audit import AuditIssue, audit_competition
-from pywcif.client import dump_wcif, fetch_wcif, load_wcif
+from pywcif.client import dump_wcif, fetch_wcif, fetch_wcif_dict, load_wcif
 from pywcif.enums import (
     AdvancementType,
     AssignmentCode,
@@ -95,6 +95,7 @@ __all__ = [
     "centiseconds_to_str",
     "dump_wcif",
     "fetch_wcif",
+    "fetch_wcif_dict",
     "format_result",
     "is_dnf",
     "is_dns",
