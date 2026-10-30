@@ -208,11 +208,12 @@ The sample competition is clean, so the loop prints nothing for it.
   spellings are accepted on input. `to_wcif_dict()` and `to_wcif_json()` write camelCase.
 - **Required nullable fields** are always written, as `null` when empty. Examples: `wcaId`,
   `registrantId`, `avatar`, `registration`, `cutoff`, `timeLimit`, `advancementCondition`,
-  `ranking`, `stationNumber`, `scrambleSetId`, and the competition's `competitorLimit`.
+  `ranking`, `stationNumber`, and the competition's `competitorLimit`.
 - **Optional private fields** are omitted when they are unset. An explicit `null` in the input is
   kept. Examples: `email`, `birthdate`, a registration's `guests`, `comments` and
   `administrativeNotes`, an attempt's `reconstruction`, a round's `scrambleSets`, an event's
-  `competitorLimit` and `qualification`, and a competition's `series`.
+  `competitorLimit` and `qualification`, and a competition's `series`. An activity's
+  `scrambleSetId` is also treated this way, because the live WCA website omits it.
 - **Unknown keys** are kept (`extra="allow"`) and written back. They are available in
   `model_extra`.
 - **Enum fields accept unknown strings.** Fields are typed `EnumType | str`, so a role or

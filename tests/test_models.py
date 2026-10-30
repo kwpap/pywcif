@@ -410,7 +410,7 @@ def test_nested_activity_children_are_dumped_camel_case() -> None:
     dumped = activity.to_wcif_dict()
     assert dumped["activityCode"] == "333-r1"
     assert dumped["childActivities"][0]["activityCode"] == "333-r1-g1"
-    assert dumped["childActivities"][0]["scrambleSetId"] is None
+    assert "scrambleSetId" not in dumped["childActivities"][0]
 
 
 def test_qualification_accepts_when_date_camel_case() -> None:
@@ -819,11 +819,19 @@ def test_assignment_station_number_always_emitted() -> None:
     ).to_wcif_dict() == {"activityId": 1, "assignmentCode": "competitor", "stationNumber": None}
 
 
-def test_activity_scramble_set_id_always_emitted() -> None:
+def test_activity_scramble_set_id_omitted_when_absent() -> None:
+    # The live WCA website leaves scrambleSetId out entirely, so it must not be added back.
     activity = Activity.model_validate(
         _activity(1, "333", "2024-07-26T07:00:00Z", "2024-07-26T08:00:00Z")
     )
-    assert activity.to_wcif_dict()["scrambleSetId"] is None
+    assert "scrambleSetId" not in activity.to_wcif_dict()
+
+
+@pytest.mark.parametrize("value", [None, 7])
+def test_activity_scramble_set_id_kept_when_given(value: int | None) -> None:
+    payload = _activity(1, "333", "2024-07-26T07:00:00Z", "2024-07-26T08:00:00Z")
+    payload["scrambleSetId"] = value
+    assert Activity.model_validate(payload).to_wcif_dict()["scrambleSetId"] == value
 
 
 def test_result_ranking_always_emitted() -> None:
@@ -887,7 +895,7 @@ def test_required_nullable_fields_emitted_as_null_in_nested_competition() -> Non
     assert dumped["events"][0]["rounds"][0]["timeLimit"] is None
     assert dumped["events"][0]["rounds"][0]["cutoff"] is None
     assert dumped["events"][0]["rounds"][0]["advancementCondition"] is None
-    assert dumped["schedule"]["venues"][0]["rooms"][0]["activities"][0]["scrambleSetId"] is None
+    assert "scrambleSetId" not in dumped["schedule"]["venues"][0]["rooms"][0]["activities"][0]
 
 
 def test_person_registrant_id_null_is_accepted() -> None:

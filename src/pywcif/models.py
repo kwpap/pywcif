@@ -289,7 +289,13 @@ def _parse_iso_datetime(value: str) -> datetime:
 
 
 class Activity(WCIFModel):
-    """A scheduled activity. Activities may nest through ``child_activities``."""
+    """A scheduled activity. Activities may nest through ``child_activities``.
+
+    ``scramble_set_id`` is nullable in the WCIF spec, but the live WCA website omits the key
+    entirely, so it is only emitted when the input had it (or it was set explicitly).
+    """
+
+    _OPTIONAL_OMITTABLE_FIELDS: ClassVar[frozenset[str]] = frozenset({"scramble_set_id"})
 
     id: int
     name: str

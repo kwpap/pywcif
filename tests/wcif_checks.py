@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
+import re
+from collections import Counter
 from collections.abc import Iterator
 from typing import Any
 
 from pywcif import ActivityCode, Competition, audit_competition
 
 _MISSING = object()
-MAX_REPORTED_DIFFS = 25
+MAX_EXAMPLES = 10
+_INDEX = re.compile(r"\[\d+\]")
 
 
 def iter_json_diffs(expected: Any, actual: Any, path: str = "$") -> Iterator[str]:
@@ -33,16 +36,31 @@ def iter_json_diffs(expected: Any, actual: Any, path: str = "$") -> Iterator[str
         yield f"{path}: {expected!r:.80} -> {actual!r:.80}"
 
 
+def summarize_diffs(diffs: list[str]) -> str:
+    """Group diff lines by path pattern (list indices -> ``[*]``) and kind, with counts.
+
+    Real documents can produce thousands of identical differences; the grouped summary shows
+    every distinct problem at once, followed by a few concrete examples.
+    """
+    patterns: Counter[str] = Counter()
+    for line in diffs:
+        path, _, detail = line.partition(": ")
+        kind = detail.split(" (")[0] if detail.startswith(("added", "dropped")) else "changed"
+        if detail.startswith("list length"):
+            kind = "list length changed"
+        patterns[f"{_INDEX.sub('[*]', path)}: {kind}"] += 1
+    grouped = "\n".join(f"  {count:>5} x {pattern}" for pattern, count in patterns.most_common())
+    examples = "\n".join(f"  {line}" for line in diffs[:MAX_EXAMPLES])
+    return f"by pattern:\n{grouped}\nfirst examples:\n{examples}"
+
+
 def assert_lossless_round_trip(data: dict[str, Any]) -> Competition:
     """Validate ``data`` and assert that dumping it back gives exactly the same dict."""
     comp = Competition.model_validate(data)
     diffs = list(iter_json_diffs(data, comp.to_wcif_dict()))
     if diffs:
-        shown = "\n".join(diffs[:MAX_REPORTED_DIFFS])
-        more = len(diffs) - MAX_REPORTED_DIFFS
-        suffix = f"\n... and {more} more" if more > 0 else ""
         raise AssertionError(
-            f"{comp.id}: round-trip changed {len(diffs)} value(s):\n{shown}{suffix}"
+            f"{comp.id}: round-trip changed {len(diffs)} value(s), {summarize_diffs(diffs)}"
         )
     return comp
 

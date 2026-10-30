@@ -21,7 +21,7 @@ from typing import Any
 import pytest
 
 from pywcif import fetch_wcif_dict
-from tests.wcif_checks import assert_lossless_round_trip, exercise_helpers
+from tests.wcif_checks import assert_lossless_round_trip, exercise_helpers, summarize_diffs
 
 REAL_DIR = Path(__file__).resolve().parent / "fixtures" / "real"
 RECORDED = sorted(REAL_DIR.glob("*.json"))
@@ -81,3 +81,15 @@ def test_checker_reports_dropped_and_added_keys(sample_dict: dict[str, Any]) -> 
     del sample_dict["persons"][0]["extensions"]  # pywcif will add it back as []
     with pytest.raises(AssertionError, match=r"\$\.persons\[0\]\.extensions: added by pywcif"):
         assert_lossless_round_trip(sample_dict)
+
+
+def test_diff_summary_groups_repeated_paths() -> None:
+    summary = summarize_diffs(
+        [
+            "$.a[0].b: added by pywcif (value None)",
+            "$.a[1].b: added by pywcif (value None)",
+            "$.c: 1 -> 2",
+        ]
+    )
+    assert "2 x $.a[*].b: added by pywcif" in summary
+    assert "1 x $.c: changed" in summary
