@@ -1,0 +1,51 @@
+name: Live WCIF
+
+# Round-trips real WCIFs downloaded from the WCA website. Kept separate from the main CI so a
+# WCA outage or rate limit never blocks a pull request.
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/test_real_wcif.py"
+      - "tests/wcif_checks.py"
+      - ".github/workflows/live-wcif.yml"
+  schedule:
+    - cron: "17 5 * * 1" # Mondays 05:17 UTC: catches WCA API changes between releases
+  workflow_dispatch:
+    inputs:
+      competitions:
+        description: "Comma-separated competition ids (empty = defaults in tests/test_real_wcif.py)"
+        required: false
+        default: ""
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Round-trip live WCIFs
+        env:
+          PYWCIF_LIVE_COMPETITIONS: ${{ github.event.inputs.competitions }}
+          PYWCIF_LIVE_SNAPSHOT_DIR: wcif-snapshots
+        run: pytest tests/test_real_wcif.py --run-live -o addopts="-ra --strict-markers"
+
+      - name: Upload downloaded WCIFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wcif-snapshots
+          path: wcif-snapshots/
+          if-no-files-found: ignore

@@ -251,3 +251,13 @@ ruff check .
 mypy src tests
 pytest
 ```
+
+### Tests against real WCIFs
+
+`tests/test_real_wcif.py` checks that real WCA documents survive a lossless round-trip:
+
+- **Recorded snapshots** in `tests/fixtures/real/*.json` run with every `pytest` (and in CI).
+  Add one with `python scripts/snapshot_wcif.py <CompetitionId>`.
+- **Live tests** download fresh WCIFs and are opt-in: `pytest --run-live`. Pick competitions
+  with `PYWCIF_LIVE_COMPETITIONS="WC2025,Euro2024"`. The separate *Live WCIF* GitHub workflow
+  runs them weekly, on pull requests touching `src/`, and on demand.

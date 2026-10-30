@@ -41,3 +41,4 @@ select = ["E", "F", "I", "B", "UP", "N", "SIM", "RUF"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra -q --strict-markers"
+markers = ["live: downloads real WCIFs from the WCA website (opt in with --run-live)"]

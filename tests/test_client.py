@@ -12,7 +12,7 @@ from typing import Any
 import pytest
 
 import pywcif
-from pywcif import Competition, dump_wcif, fetch_wcif, load_wcif
+from pywcif import Competition, dump_wcif, fetch_wcif, fetch_wcif_dict, load_wcif
 
 MINIMAL_WCIF: dict[str, Any] = {
     "formatVersion": "1.0",
@@ -180,6 +180,19 @@ def test_invalid_body_raises_value_error(monkeypatch: pytest.MonkeyPatch) -> Non
 
     with pytest.raises(ValueError):
         fetch_wcif("TestComp2026")
+
+
+def test_fetch_wcif_dict_returns_raw_json_unvalidated(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(urllib.request, "urlopen", _FakeUrlopen(b'{"id": "x"}'))
+
+    assert fetch_wcif_dict("TestComp2026") == {"id": "x"}
+
+
+def test_fetch_wcif_dict_rejects_non_object_json(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(urllib.request, "urlopen", _FakeUrlopen(b"[1, 2]"))
+
+    with pytest.raises(ValueError, match="expected a JSON object"):
+        fetch_wcif_dict("TestComp2026")
 
 
 # ---------------------------------------------------------------------------
