@@ -1,7 +1,8 @@
 # pywcif
 
 [![CI](https://github.com/kwpap/pywcif/actions/workflows/ci.yml/badge.svg)](https://github.com/kwpap/pywcif/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
+[![PyPI](https://img.shields.io/pypi/v/pywcif)](https://pypi.org/project/pywcif/)
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
 ![Mypy](https://img.shields.io/badge/mypy-strict-blueviolet)
 ![Ruff](https://img.shields.io/badge/lint-ruff-46a758)
 
@@ -262,3 +263,12 @@ pytest
 - **Live tests** download fresh WCIFs and are opt-in: `pytest --run-live`. Pick competitions
   with `PYWCIF_LIVE_COMPETITIONS="WC2025,Euro2024"`. The separate *Live WCIF* GitHub workflow
   runs them weekly, on pull requests touching `src/`, and on demand.
+
+### Releasing
+
+1. Bump `__version__` in `src/pywcif/__init__.py` and move the `Unreleased` notes in
+   `CHANGELOG.md` under the new version.
+2. Merge to `main`, then tag and push: `git tag v0.2.0 && git push origin v0.2.0`.
+3. The *Release* workflow checks the tag matches `__version__`, runs the tests against the
+   built wheel, publishes to PyPI (Trusted Publishing, no stored token), and creates the GitHub
+   release from the changelog. Run the workflow by hand to publish to TestPyPI first.
