@@ -12,6 +12,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # pywcif is a library: keep minimum versions low so it installs next to other packages.
+    # Only propose a change when a new release falls outside the allowed range.
+    versioning-strategy: increase-if-necessary
     groups:
       python:
         patterns: ["*"]

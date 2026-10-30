@@ -41,3 +41,30 @@ jobs:
 
       - name: Pytest
         run: pytest --cov=pywcif
+
+  # Users get whatever pydantic their other packages allow, so prove the declared minimum works.
+  test-min-deps:
+    name: test (3.10, oldest pydantic)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.10"
+
+      - name: Install the oldest supported pydantic
+        run: |
+          minimum=$(python -c "import re, pathlib; print(re.search(r'pydantic>=([0-9.]+)', pathlib.Path('pyproject.toml').read_text()).group(1))")
+          pip install "pydantic==$minimum" pytest
+          pip install --no-deps -e .
+          python -c "import pydantic; print('pydantic', pydantic.VERSION)"
+
+      - name: Pytest
+        run: pytest
