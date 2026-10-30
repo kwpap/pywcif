@@ -4,26 +4,52 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pywcif"
-version = "0.1.0"
-description = "Typed Pydantic v2 models for WCA WCIF v1.2"
+dynamic = ["version"]
+description = "Typed Pydantic v2 models and tools for the WCA Competition Interchange Format (WCIF v1.2)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Kostantinos Papadopoulos" }]
+keywords = ["wca", "wcif", "speedcubing", "rubiks-cube", "pydantic", "world-cube-association"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Games/Entertainment :: Puzzle Games",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
 dependencies = ["pydantic>=2.6.0,<3.0.0"]
 
+[project.urls]
+Homepage = "https://github.com/kwpap/pywcif"
+Repository = "https://github.com/kwpap/pywcif"
+Issues = "https://github.com/kwpap/pywcif/issues"
+Changelog = "https://github.com/kwpap/pywcif/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
-http = ["httpx>=0.27.0"]
 dev = [
   "pytest>=8.0.0",
   "pytest-cov>=5.0.0",
   "mypy>=1.10.0",
   "ruff>=0.4.0",
-  "httpx>=0.27.0",
 ]
+
+[tool.hatch.version]
+path = "src/pywcif/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pywcif"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [".github"]
 
 [tool.mypy]
 strict = true
