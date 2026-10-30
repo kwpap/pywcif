@@ -5,12 +5,35 @@ build-backend = "hatchling.build"
 [project]
 name = "pywcif"
 dynamic = ["version"]
-description = "Typed Pydantic v2 models and tools for the WCA Competition Interchange Format (WCIF v1.2)"
+description = "Python library for World Cube Association (WCA) speedcubing competition data (WCIF): schedules, results, groups and checks"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Kostantinos Papadopoulos" }]
-keywords = ["wca", "wcif", "speedcubing", "rubiks-cube", "pydantic", "world-cube-association"]
+keywords = [
+  "wca",
+  "wcif",
+  "world cube association",
+  "speedcubing",
+  "cubing",
+  "rubiks cube",
+  "rubik's cube",
+  "puzzle",
+  "competition",
+  "competition management",
+  "speedcubing competition",
+  "results",
+  "schedule",
+  "groups",
+  "scorecards",
+  "groupifier",
+  "wca live",
+  "delegate",
+  "organizer",
+  "fewest moves",
+  "multi-blind",
+  "pydantic",
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
