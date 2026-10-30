@@ -16,6 +16,12 @@ include breaking changes.
 - Clearer PyPI summary and more search keywords (speedcubing, Rubik's cube, WCA, Groupifier,
   WCA Live, ...), so people can find the package.
 
+### Fixed
+
+- Keep the minimum pydantic version at 2.6.0. An automated update had raised it to 2.14.1,
+  which would have forced every user to upgrade pydantic. CI now tests the oldest supported
+  pydantic.
+
 ### Security
 
 - Added `SECURITY.md` with a private reporting channel, Dependabot updates for GitHub Actions
