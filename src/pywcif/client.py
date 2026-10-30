@@ -17,6 +17,8 @@ from pywcif.models import Competition
 
 _DEFAULT_BASE_URL = "https://www.worldcubeassociation.org"
 _ALLOWED_SCHEMES = frozenset({"http", "https"})
+# Hosts where sending a token over plain http is acceptable (a local WCA development server).
+_LOOPBACK_HOSTS = frozenset({"localhost", "127.0.0.1", "::1"})
 
 
 def fetch_wcif(
@@ -44,8 +46,9 @@ def fetch_wcif(
         The parsed and validated :class:`~pywcif.models.Competition`.
 
     Raises:
-        ValueError: If ``base_url`` does not use an http or https scheme, or if the response
-            body is not a valid WCIF document (including invalid JSON).
+        ValueError: If ``base_url`` does not use an http or https scheme, if a token would be
+            sent over plain http to a non-loopback host, or if the response body is not a
+            valid WCIF document (including invalid JSON).
         urllib.error.HTTPError: If the server answers with an error status (for example 404).
         urllib.error.URLError: If the request fails at the network level, including timeouts.
     """
@@ -68,14 +71,19 @@ def fetch_wcif_dict(
     comparing them with ``Competition.to_wcif_dict()``.
 
     Raises:
-        ValueError: If ``base_url`` does not use an http or https scheme, or the body is not a
-            JSON object.
+        ValueError: If ``base_url`` does not use an http or https scheme, if a token would be
+            sent over plain http to a non-loopback host, or if the body is not a JSON object.
         urllib.error.HTTPError: If the server answers with an error status (for example 404).
         urllib.error.URLError: If the request fails at the network level, including timeouts.
     """
-    scheme = urllib.parse.urlsplit(base_url).scheme.lower()
+    parts = urllib.parse.urlsplit(base_url)
+    scheme = parts.scheme.lower()
     if scheme not in _ALLOWED_SCHEMES:
         raise ValueError(f"base_url must use http or https, got {base_url!r}")
+    if oauth_token and scheme != "https" and parts.hostname not in _LOOPBACK_HOSTS:
+        raise ValueError(
+            f"refusing to send an OAuth token over plain http to {base_url!r}; use https"
+        )
 
     # Imported here because pywcif/__init__.py imports this module before it defines __version__.
     from pywcif import __version__
@@ -88,11 +96,14 @@ def fetch_wcif_dict(
     }
     if oauth_token:
         url = f"{root}/api/v0/competitions/{quoted_id}/wcif"
-        headers["Authorization"] = f"Bearer {oauth_token}"
     else:
         url = f"{root}/api/v0/competitions/{quoted_id}/wcif/public"
 
     request = urllib.request.Request(url, headers=headers)
+    if oauth_token:
+        # Unredirected headers are not copied onto redirects, so a redirect to another host
+        # (or down to http) never receives the token.
+        request.add_unredirected_header("Authorization", f"Bearer {oauth_token}")
     with urllib.request.urlopen(request, timeout=timeout) as response:
         body = response.read()
     data: Any = json.loads(body)
@@ -109,8 +120,10 @@ def load_wcif(source: str | Path | bytes | bytearray | dict[str, Any]) -> Compet
 
             * a ``dict`` already decoded from WCIF JSON;
             * ``bytes`` or ``bytearray`` containing the JSON document (UTF-8);
-            * a ``str`` whose stripped text starts with ``{`` and is parsed as JSON;
+            * a ``str`` whose stripped text starts with ``{`` or ``[``, parsed as JSON;
             * any other ``str`` or a :class:`pathlib.Path`, read as a UTF-8 file.
+
+            A leading UTF-8 byte-order mark is ignored in every form.
 
     Returns:
         The validated competition.
@@ -123,11 +136,11 @@ def load_wcif(source: str | Path | bytes | bytearray | dict[str, Any]) -> Compet
     if isinstance(source, dict):
         return Competition.model_validate(source)
     if isinstance(source, (bytes, bytearray)):
-        return Competition.model_validate_json(source)
+        return _validate_json_text(bytes(source).decode("utf-8-sig"))
     if isinstance(source, Path):
         return _load_file(source)
-    if source.lstrip().startswith("{"):
-        return Competition.model_validate_json(source)
+    if source.lstrip("\ufeff \t\r\n").startswith(("{", "[")):
+        return _validate_json_text(source)
     return _load_file(Path(source))
 
 
@@ -154,5 +167,10 @@ def dump_wcif(
 
 
 def _load_file(path: Path) -> Competition:
-    """Read a UTF-8 WCIF JSON file and validate it."""
-    return Competition.model_validate_json(path.read_text(encoding="utf-8"))
+    """Read a UTF-8 WCIF JSON file (a leading byte-order mark is allowed) and validate it."""
+    return _validate_json_text(path.read_text(encoding="utf-8-sig"))
+
+
+def _validate_json_text(text: str) -> Competition:
+    """Validate JSON text, ignoring a leading byte-order mark (common in Windows editors)."""
+    return Competition.model_validate_json(text.lstrip("\ufeff"))

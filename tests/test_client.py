@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import http.client
+import io
 import json
 import urllib.error
 import urllib.request
@@ -321,3 +323,57 @@ def test_all_has_no_duplicates() -> None:
 
 def test_version_is_0_1_0() -> None:
     assert pywcif.__version__ == "0.1.0"
+
+
+# ---------------------------------------------------------------------------
+# Token safety and input robustness
+# ---------------------------------------------------------------------------
+
+
+def test_token_is_never_copied_onto_redirects(fake_urlopen: _FakeUrlopen) -> None:
+    fetch_wcif("TestComp2026", oauth_token="secret-token")
+    request = fake_urlopen.calls[0][0]
+
+    # Sent on this request, but stored as an unredirected header ...
+    assert request.get_header("Authorization") == "Bearer secret-token"
+    assert "Authorization" not in request.headers
+    # ... so urllib's redirect handler builds the follow-up request without it.
+    handler = urllib.request.HTTPRedirectHandler()
+    redirected = handler.redirect_request(
+        request, io.BytesIO(), 302, "Found", http.client.HTTPMessage(), "http://evil.example/steal"
+    )
+    assert redirected is not None
+    assert redirected.get_header("Authorization") is None
+
+
+@pytest.mark.parametrize("base_url", ["http://www.worldcubeassociation.org", "http://10.0.0.5"])
+def test_token_over_plain_http_is_refused(fake_urlopen: _FakeUrlopen, base_url: str) -> None:
+    with pytest.raises(ValueError, match="plain http"):
+        fetch_wcif("TestComp2026", oauth_token="t", base_url=base_url)
+    assert fake_urlopen.calls == []
+
+
+@pytest.mark.parametrize("base_url", ["http://localhost:3000", "http://127.0.0.1", "http://[::1]"])
+def test_token_over_http_allowed_for_loopback(fake_urlopen: _FakeUrlopen, base_url: str) -> None:
+    fetch_wcif("TestComp2026", oauth_token="t", base_url=base_url)
+    assert len(fake_urlopen.calls) == 1
+
+
+def test_public_fetch_over_plain_http_still_allowed(fake_urlopen: _FakeUrlopen) -> None:
+    fetch_wcif("TestComp2026", base_url="http://mirror.example")
+    assert len(fake_urlopen.calls) == 1
+
+
+def test_load_wcif_ignores_utf8_bom_in_bytes_str_and_files(tmp_path: Path) -> None:
+    text = json.dumps(MINIMAL_WCIF)
+    path = tmp_path / "bom.json"
+    path.write_bytes(b"\xef\xbb\xbf" + text.encode("utf-8"))
+
+    for source in (b"\xef\xbb\xbf" + text.encode("utf-8"), "﻿" + text, path, str(path)):
+        assert load_wcif(source).id == "TestComp2026"
+
+
+@pytest.mark.parametrize("text", ["[]", "  [1, 2]"])
+def test_load_wcif_non_object_json_is_a_validation_error(text: str) -> None:
+    with pytest.raises(ValueError):
+        load_wcif(text)
